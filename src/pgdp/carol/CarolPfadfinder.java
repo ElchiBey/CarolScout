@@ -14,16 +14,20 @@ public class CarolPfadfinder {
 		// Note that in this array initialization the rows are in reverse order and both
 		// x- and y-axis are swapped.
 		int[][] playground = { //
-				{ 0, -1, -1, -1, -1 }, //
-				{ -1, -1, -1, -1, -1 }, //
-				{ -1, -1, 7, 8, 9 }, //
-				{ -1, -1, 8, 3, 5 }, //
-				{ -1, -1, 9, 5, 3 } //
+				{ -1, -1, -1,  2, -1, -1,  2 }, //
+				{ -1,  2, -1,  2, -1, -1, -1 }, //
+				{ -1, -1, -1, -1, -1,  2, -1 }, //
+				{  2, -1,  2,  2, -1, -1, -1 }, //
+				{ -1, -1, -1,  2, -1, -1, -1 }, //
+				{ -1,  2,  2, -1, -1,  2,  2 }, //
+				{ -1,  2, -1, -1,  2, -1, -1 }, //
+				{ -1, -1, -1, -1, -1,  2, -1 }, //
+				{  2, -1, -1,  2, -1, -1, -1 }, //
 		};
-		int startX = 2;
-		int startY = 1;
-		int startDir = 0;
-		int startBlocks = 1;
+		int startX = 0;
+		int startY = 0;
+		int startDir = 3;
+		int startBlocks = 0;
 
 		printPlayground(playground, startX, startY, startDir, startBlocks);
 
