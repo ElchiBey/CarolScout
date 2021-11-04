@@ -49,11 +49,46 @@ public class CarolPfadfinder {
 	}
 	
 	public static boolean wasThereBefore(char[] instr, int filled){
-		if(filled<=1 || filled>instr.length) return false;
-		for(int i=0; i<filled; i++){
-			if(instr[i]=='p' || instr[i]=='n') return false;
+		if(filled<1 || filled>instr.length) return false;
+		int[][] arr = new int[2*filled+2][2*filled+2];
+		for(int i=0; i<arr.length; i++){
+			for(int j=0; j<arr[i].length; j++){
+				arr[i][j]=0;
+			}
 		}
-		return true;
+		int x = filled;
+		int y = filled;
+		int direction = 0;
+		for(int i=0; i<filled; i++){
+			if (instr[i] == 'r') {
+				direction--;
+				if (direction == -1) direction = 3;
+			}
+			else if (instr[i] == 'l') {
+				direction++;
+				if (direction == 4) direction = 0;
+			}
+			else if(instr[i]=='s') {
+				if(direction==0) x++;
+				else if(direction==1) y++;
+				else if(direction==2) x--;
+				else y--;
+			}
+			else if(instr[i]=='n') {
+				if (direction == 0) arr[x + 1][y]--;
+				if (direction == 1) arr[x][y + 1]--;
+				if (direction == 2) arr[x - 1][y]--;
+				if (direction == 3) arr[x][y - 1]--;
+			}
+			else {
+				if (direction == 0) arr[x + 1][y]++;
+				if (direction == 1) arr[x][y + 1]++;
+				if (direction == 2) arr[x - 1][y]++;
+				if (direction == 3) arr[x][y - 1]++;
+			}
+			if(i==filled-1 && x==filled && y==filled && arr[x][y]==0) return true;
+		}
+		return false;
 	}
 
 	public static void main(String[] args) {
