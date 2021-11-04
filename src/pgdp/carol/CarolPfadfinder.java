@@ -25,28 +25,28 @@ public class CarolPfadfinder {
 			else if(x<=findX && y>findY) { d=1; s = findX-x+y-findY; }
 			else if(x<=findX && y<findY) { d=1; s = findX-x+findY-y; }
 			else if(x>findX && y>=findY) { d=2; s = x-findX+y-findY; }
-			else { d=2; s = x-findX+findY-y; }
+			else if(x>findX && y<findY){ d=2; s = x-findX+findY-y; }
 		}
 		else if(direction==1) {
 			if(x==findX && y<findY) { s = findY-y; }
 			else if(x<findX && y<=findY) { d=1; s = findX-x+findY-y; }
 			else if(x>findX && y<=findY) { d=1; s = x-findX+findY-y; }
 			else if(x>=findX && y>findY) { d=2; s = x-findX+y-findY; }
-			else { d=2; s = findX-x+y-findY; }
+			else if(x<findX && y>findY) { d=2; s = findX-x+y-findY; }
 		}
 		else if(direction==2) {
 			if(x>findX && y==findY) { s = x-findX; }
 			else if(x>=findX && y>findY) { d=1; s = x-findX+y-findY; }
 			else if(x>=findX && y<findY) { d=1; s = x-findX+y-findY; }
 			else if(x<findX && y>=findY) { d=2; s = x-findX+y-findY; }
-			else { d=2; s = x-findX+findY-y; }
+			else if(x<findX && y<findY) { d=2; s = x-findX+findY-y; }
 		}
 		else {
 			if(x==findX && y>findY) { s = y-findY; }
 			else if(x<findX && y>=findY) { d=1; s = findX-x+y-findY; }
 			else if(x>findX && y>=findY) { d=1; s = x-findX+y-findY; }
 			else if(x>=findX && y<findY) { d=2; s = x-findX+findY-y; }
-			else { d=2; s = findX-x+findY-y; }
+			else if(x<findX && y<findY) { d=2; s = findX-x+findY-y; }
 		}
 		return d+s;
 	}
