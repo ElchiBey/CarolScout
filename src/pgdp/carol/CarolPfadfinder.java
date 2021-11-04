@@ -18,26 +18,37 @@ public class CarolPfadfinder {
 	}
 	
 	public static int getMinimalStepsAndTurns(int x, int y, int direction, int findX, int findY){
-//		if(x==findX && y<=findY && direction==1) return 0;
-//		if(x>=findX && y==findY && direction==2) return 0;
-//		if(x==findX && y>=findY && direction==3) return 0;
 		int d = 0;
 		int s = 0;
-// 		if(direction==0) {
-			     if(x<=findX && y==findY) { s = findX-x; }
+		if(direction==0) {
+			     if(x<findX && y==findY) { s = findX-x; }
 			else if(x<=findX && y>findY) { d=1; s = findX-x+y-findY; }
 			else if(x<=findX && y<findY) { d=1; s = findX-x+findY-y; }
 			else if(x>findX && y>=findY) { d=2; s = x-findX+y-findY; }
 			else { d=2; s = x-findX+findY-y; }
-// 		}
+		}
+		else if(direction==1) {
+			if(x==findX && y<findY) { s = findY-y; }
+			else if(x<findX && y<=findY) { d=1; s = findX-x+findY-y; }
+			else if(x>findX && y<=findY) { d=1; s = x-findX+findY-y; }
+			else if(x>=findX && y>findY) { d=2; s = x-findX+y-findY; }
+			else { d=2; s = findX-x+y-findY; }
+		}
+		else if(direction==2) {
+			if(x>findX && y==findY) { s = x-findX; }
+			else if(x>=findX && y>findY) { d=1; s = x-findX+y-findY; }
+			else if(x>=findX && y<findY) { d=1; s = x-findX+y-findY; }
+			else if(x<findX && y>=findY) { d=2; s = x-findX+y-findY; }
+			else { d=2; s = x-findX+findY-y; }
+		}
+		else {
+			if(x==findX && y>findY) { s = y-findY; }
+			else if(x<findX && y>=findY) { d=1; s = findX-x+y-findY; }
+			else if(x>findX && y>=findY) { d=1; s = x-findX+y-findY; }
+			else if(x>=findX && y<findY) { d=2; s = x-findX+findY-y; }
+			else { d=2; s = findX-x+findY-y; }
+		}
 		return d+s;
-//		else if(direction==1) {
-//			if(x==findX && y<=findY) { s = findY-y; }
-//			if(x<findX && y<=findY) { d=1; s = findX-x+findY-y; }
-//			if(x>findX && y<findY) { d=1; s = x-findX+findY-y; }
-//			if(x>findX && y>findY) { d=2; s = x-findX+y-findY; }
-//			if(x>findX && y<findY) { d=2; s = x-findX+findY-y; }
-//		}
 	}
 
 	public static void main(String[] args) {
