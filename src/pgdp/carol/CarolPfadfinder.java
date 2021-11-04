@@ -36,7 +36,7 @@ public class CarolPfadfinder {
 			else if(x>=findX && y>findY) { d=1; s = x-findX+y-findY; }
 			else if(x>=findX && y<findY) { d=1; s = x-findX+findY-y; }
 			else if(x<findX && y>=findY) { d=2; s = x-findX+y-findY; }
-			else if(x<findX && y<findY) { d=2; s = x-findX+findY-y; }
+			else if(x<findX && y<findY) { d=2; s = findX-x+findY-y; }
 		}
 		else {
 			if(x==findX && y>findY) { s = y-findY; }
