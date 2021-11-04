@@ -23,13 +23,13 @@ public class CarolPfadfinder {
 //		if(x==findX && y>=findY && direction==3) return 0;
 		int d = 0;
 		int s = 0;
-		if(direction==0) {
+// 		if(direction==0) {
 			     if(x<=findX && y==findY) { s = findX-x; }
 			else if(x<=findX && y>findY) { d=1; s = findX-x+y-findY; }
 			else if(x<=findX && y<findY) { d=1; s = findX-x+findY-y; }
 			else if(x>findX && y>=findY) { d=2; s = x-findX+y-findY; }
 			else { d=2; s = x-findX+findY-y; }
-		}
+// 		}
 		return d+s;
 //		else if(direction==1) {
 //			if(x==findX && y<=findY) { s = findY-y; }
