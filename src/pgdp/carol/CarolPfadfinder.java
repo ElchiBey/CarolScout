@@ -87,7 +87,7 @@ public class CarolPfadfinder {
 				if (direction == 2) arr[x - 1][y]++;
 				if (direction == 3) arr[x][y - 1]++;
 			}
-			if(instr[i]=='s' || instr[i]=='n' || instr[i]=='p'){
+			if(instr[i]=='n' || instr[i]=='p'){
 				if(x!=filled || y!=filled) return false;
 			}
 			if(i==filled-1 && x==filled && y==filled && arr[x][y]==0) return true;
