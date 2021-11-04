@@ -59,6 +59,7 @@ public class CarolPfadfinder {
 		int x = filled;
 		int y = filled;
 		int direction = 0;
+		if(filled==1 && instr[filled-1]!='r' && instr[filled-1]!='l') return false;
 		for(int i=0; i<filled; i++){
 			if (instr[i] == 'r') {
 				direction--;
@@ -85,6 +86,9 @@ public class CarolPfadfinder {
 				if (direction == 1) arr[x][y + 1]++;
 				if (direction == 2) arr[x - 1][y]++;
 				if (direction == 3) arr[x][y - 1]++;
+			}
+			if(instr[i]=='s' || instr[i]=='n' || instr[i]=='p'){
+				if(x!=filled || y!=filled) return false;
 			}
 			if(i==filled-1 && x==filled && y==filled && arr[x][y]==0) return true;
 		}
