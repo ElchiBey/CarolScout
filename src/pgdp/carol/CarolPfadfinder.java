@@ -50,7 +50,7 @@ public class CarolPfadfinder {
 	
 	public static boolean wasThereBefore(char[] instr, int filled){
 		if(filled==1) return true;
-		
+		return false;
 	}
 
 	public static void main(String[] args) {
