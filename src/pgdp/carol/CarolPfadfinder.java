@@ -7,11 +7,14 @@ import java.util.Arrays;
 public class CarolPfadfinder {
     
     public static boolean lastTurnsAreUseless(char[] instr, int filled){
+        if(filled<2) return false;
+        else{
 		if(instr[filled-1]=='r' && instr[filled-2]=='l') return true;
 		else if(instr[filled-1]=='l' && instr[filled-2]=='r') return true;
 		else if(instr[filled-1]=='r' && instr[filled-2]=='r') return true;
 		else if(instr[filled-1]=='l' && instr[filled-2]=='l' && instr[filled-3]=='l') return true;
 		else return false;
+        }
 	}
 
 	public static void main(String[] args) {
