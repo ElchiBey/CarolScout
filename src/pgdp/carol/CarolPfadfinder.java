@@ -49,8 +49,10 @@ public class CarolPfadfinder {
 	}
 	
 	public static boolean wasThereBefore(char[] instr, int filled){
-		if(filled==1) return true;
-		return false;
+		for(int i=0; i<filled; i++){
+			if(instr[i]=='p' || instr[i]=='n') return false;
+		}
+		return true;
 	}
 
 	public static void main(String[] args) {
