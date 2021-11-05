@@ -96,9 +96,9 @@ public class CarolPfadfinder {
 	}
 	
 	public static boolean findInstructions(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions){
-		for(int i=0; i<instructions.length; i++){
+// 		for(int i=0; i<instructions.length; i++){
 			
-		}
+// 		}
 		return null;
 	}
 
