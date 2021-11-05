@@ -99,7 +99,7 @@ public class CarolPfadfinder {
 // 		for(int i=0; i<instructions.length; i++){
 			
 // 		}
-		return;
+		return false;
 	}
 
 	public static void main(String[] args) {
