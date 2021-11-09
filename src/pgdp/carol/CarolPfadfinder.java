@@ -134,16 +134,11 @@ public class CarolPfadfinder {
         int number = getMinimalStepsAndTurns(x, y, direction, findX, findY);
         if (number > instructions.length) return false;
         int filled = 0;
-        boolean result = recursiveAuxiliary(playground, x, y, direction, blocks, findX, findY, instructions, filled);
-        if (result) {
-            System.out.print("[");
-            for (int i = 0; i < instructions.length; i++) {
-                System.out.print(instructions[i]);
-                if (i + 1 != instructions.length) System.out.print(", ");
-            }
-            System.out.print("]");
+        for(int i=0; i<instructions.length; i++){
+            instructions[i] = 'e';
         }
-        return result;
+        System.out.print(instructions);
+        return recursiveAuxiliary(playground, x, y, direction, blocks, findX, findY, instructions, filled);
     }
 
     private static boolean recursiveAuxiliary(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions, int filled) {
@@ -278,15 +273,16 @@ public class CarolPfadfinder {
         // Note that in this array initialization the rows are in reverse order and both
         // x- and y-axis are swapped.
         int[][] playground = { //
-                {0, 0, 0, 0, 0, 9,}, //
-                {0, 0, 0, 0, 0, 9,}, //
-                {9, 9, 9, 7, 9, 9,}, //
-                {9, 0, 0, 0, 0, 0,}, //
-//				{ -1, -1, -1,  2, -1, -1, }, //
-//				{ -1,  2,  2, -1, -1,  2, }, //
-//				{ -1,  2, -1, -1,  2, -1, }, //
-//				{ -1, -1, -1, -1, -1,  2, }, //
-//				{  2, -1, -1,  2, -1, -1, }, //
+                  {0}
+//                {0, 0, 0, 0, 0, 9,}, //
+//                {0, 0, 0, 0, 0, 9,}, //
+//                {9, 9, 9, 7, 9, 9,}, //
+//                {9, 0, 0, 0, 0, 0,}, //
+////				{ -1, -1, -1,  2, -1, -1, }, //
+////				{ -1,  2,  2, -1, -1,  2, }, //
+////				{ -1,  2, -1, -1,  2, -1, }, //
+////				{ -1, -1, -1, -1, -1,  2, }, //
+////				{  2, -1, -1,  2, -1, -1, }, //
         };
         //     int startX = 0;
         //      int startY = 0;
@@ -310,10 +306,10 @@ public class CarolPfadfinder {
         int y = 0;
         int direction = 3;
         int blocks = 0;
-        int findX = 3;
-        int findY = 5;
-        char[] instructions = new char[30];
-        for (int i = 0; i < 30; i++) {
+        int findX = 0;
+        int findY = 0;
+        char[] instructions = new char[10];
+        for (int i = 0; i < 10; i++) {
             instructions[i] = 'e';
         }
         boolean a = findInstructions(playground, x, y, direction, blocks, findX, findY, instructions);
