@@ -101,7 +101,16 @@ public class CarolPfadfinder {
         int number = getMinimalStepsAndTurns(x, y, direction, findX, findY);
         if (number > instructions.length) return false;
         int filled = 0;
-        return recursiveAuxiliary(playground, x, y, direction, blocks, findX, findY, instructions, filled);
+        boolean result = recursiveAuxiliary(playground, x, y, direction, blocks, findX, findY, instructions, filled);
+        if(result) {
+            System.out.print("[");
+            for (int i = 0; i < instructions.length; i++) {
+                System.out.print(instructions[i]);
+                if(i+1!=instructions.length) System.out.print(", ");
+            }
+            System.out.print("]");
+        }
+        return result;
     }
 
     private static boolean recursiveAuxiliary(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions, int filled) {
