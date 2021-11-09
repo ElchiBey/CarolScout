@@ -332,20 +332,20 @@ public class CarolPfadfinder {
         // Note that in this array initialization the rows are in reverse order and both
         // x- and y-axis are swapped.
         int[][] playground = { //
-                {0, 0, 0, 0, 0, 9,}, //
-                {0, 0, 0, 0, 0, 9,}, //
-                {9, 9, 9, 7, 9, 9,}, //
-                {9, 0, 0, 0, 0, 0,}, //
-//				{ -1, -1, -1,  2, -1, -1, }, //
-//				{ -1,  2,  2, -1, -1,  2, }, //
-//				{ -1,  2, -1, -1,  2, -1, }, //
-//				{ -1, -1, -1, -1, -1,  2, }, //
-//				{  2, -1, -1,  2, -1, -1, }, //
+//                {0, 0, 0, 0, 0, 9,}, //
+//                {0, 0, 0, 0, 0, 9,}, //
+//                {9, 9, 9, 7, 9, 9,}, //
+//                {9, 0, 0, 0, 0, 0,}, //
+				{ -1, -1, -1,  2, -1, -1, }, //
+				{ -1,  2,  2, -1, -1,  2, }, //
+				{ -1,  2, -1, -1,  2, -1, }, //
+				{ -1, -1, -1, -1, -1,  2, }, //
+				{  2, -1, -1,  2, -1, -1, }, //
         };
-        //     int startX = 0;
-        //      int startY = 0;
-        //       int startDir = 3;
-//        int startBlocks = 0;
+        int startX = 0;
+        int startY = 0;
+        int startDir = 3;
+        int startBlocks = 0;
         //char[] instructions = {'n','s','l','s','l','s','l','s'};
         //char[] instr = {'s','r','r'};
         //char[] instr = {'r','l','s','p','r','l'};
@@ -360,18 +360,18 @@ public class CarolPfadfinder {
 
         //System.out.print(lastTurnsAreUseless(instr,filled));
 
-        int x = 0;
-        int y = 0;
-        int direction = 3;
-        int blocks = 0;
-        int findX = 3;
-        int findY = 5;
-        char[] instructions = new char[30];
-        for (int i = 0; i < 30; i++) {
-            instructions[i] = 'e';
-        }
-        boolean a = findInstructions(playground, x, y, direction, blocks, findX, findY, instructions);
-        System.out.print("\n" + a);
+//        int x = 0;
+//        int y = 0;
+//        int direction = 3;
+//        int blocks = 0;
+//        int findX = 3;
+//        int findY = 5;
+//        char[] instructions = new char[30];
+//        for (int i = 0; i < 30; i++) {
+//            instructions[i] = 'e';
+//        }
+//        boolean a = findInstructions(playground, x, y, direction, blocks, findX, findY, instructions);
+//        System.out.print("\n" + a);
 
 		// this is expected to have an optimal solution with exactly 40 instructions
 		char[] instructions = null;
