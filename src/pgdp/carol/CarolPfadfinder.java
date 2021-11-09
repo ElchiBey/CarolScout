@@ -372,18 +372,18 @@ public class CarolPfadfinder {
         }
         boolean a = findInstructions(playground, x, y, direction, blocks, findX, findY, instructions);
         System.out.print("\n" + a);
-//
-//		// this is expected to have an optimal solution with exactly 40 instructions
-//		char[] instructions = null;
-////		instructions = findOptimalSolution(playground, startX, startY, startDir, startBlocks, findX, findY, 40); // TODO implement
-//		boolean success = instructions != null;
-//
-//		if (success) {
-//			write("SUCCESS");
-//			printPlayground(playground);
-//			write(Arrays.toString(instructions));
-//		} else {
-//			write("FAILED");
-//		}
+
+		// this is expected to have an optimal solution with exactly 40 instructions
+		char[] instructions = null;
+//		instructions = findOptimalSolution(playground, startX, startY, startDir, startBlocks, findX, findY, 40); // TODO implement
+		boolean success = instructions != null;
+
+		if (success) {
+			write("SUCCESS");
+			printPlayground(playground);
+			write(Arrays.toString(instructions));
+		} else {
+			write("FAILED");
+		}
     }
 }
