@@ -112,14 +112,14 @@ public class CarolPfadfinder {
                 else y--;
             } else if (instr[i] == 'n') {
                 if (direction == 0) arr[x + 1][y]--;
-                if (direction == 1) arr[x][y + 1]--;
-                if (direction == 2) arr[x - 1][y]--;
-                if (direction == 3) arr[x][y - 1]--;
+                else if (direction == 1) arr[x][y + 1]--;
+                else if (direction == 2) arr[x - 1][y]--;
+                else if (direction == 3) arr[x][y - 1]--;
             } else {
                 if (direction == 0) arr[x + 1][y]++;
-                if (direction == 1) arr[x][y + 1]++;
-                if (direction == 2) arr[x - 1][y]++;
-                if (direction == 3) arr[x][y - 1]++;
+                else if (direction == 1) arr[x][y + 1]++;
+                else if (direction == 2) arr[x - 1][y]++;
+                else if (direction == 3) arr[x][y - 1]++;
             }
             if (instr[i] == 'n' || instr[i] == 'p') {
                 if (x != filled || y != filled) return false;
@@ -134,23 +134,26 @@ public class CarolPfadfinder {
         int number = getMinimalStepsAndTurns(x, y, direction, findX, findY);
         if (number > instructions.length) return false;
         int filled = 0;
-        for(int i=0; i<instructions.length; i++){
-            instructions[i] = 'e';
+        boolean result = recursiveAuxiliary(playground, x, y, direction, blocks, findX, findY, instructions, filled);
+        if (result) {
+            System.out.print("[");
+            for (int i = 0; i < instructions.length; i++) {
+                System.out.print(instructions[i]);
+                if (i + 1 != instructions.length) System.out.print(", ");
+            }
+            System.out.print("]");
         }
-        System.out.print(instructions);
-        return recursiveAuxiliary(playground, x, y, direction, blocks, findX, findY, instructions, filled);
+        return result;
     }
 
     private static boolean recursiveAuxiliary(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions, int filled) {
-        boolean case1 = wasThereBefore(instructions,filled);
-        boolean case2 = lastTurnsAreUseless(instructions,filled);
         if (x == findX && y == findY) return true;
-        if (x < 0 || x > playground.length || y < 0 || y > playground[0].length) return false;
-        if (findX < 0 || findX > playground.length || findY < 0 || findY > playground[0].length) return false;
         if (filled == instructions.length) return false;
         if(filled>1) {
-            if (case1) return false;
-            if (case2) return false;
+            if (wasThereBefore(instructions,filled)) return false;
+            if (lastTurnsAreUseless(instructions,filled)) return false;
+            if(instructions[filled]=='p' && instructions[filled-1]=='n') return false;
+            if(instructions[filled]=='n' && instructions[filled-1]=='p') return false;
         }
 
         //go forward - 's'
@@ -159,6 +162,9 @@ public class CarolPfadfinder {
             if (x + 1 < playground.length) {
                 if (playground[x][y] - playground[x + 1][y] == -1 || playground[x][y] - playground[x + 1][y] == 0 || playground[x][y] - playground[x + 1][y] == 1) {
                     if(recursiveAuxiliary(playground, x + 1, y, direction, blocks, findX, findY, instructions, filled+1)) return true;
+                    else {
+                        instructions[filled] = 'e';
+                    }
                 }
             }
         }
@@ -166,6 +172,9 @@ public class CarolPfadfinder {
             if (y + 1 < playground[0].length) {
                 if (playground[x][y] - playground[x][y + 1] == -1 || playground[x][y] - playground[x][y + 1] == 0 || playground[x][y] - playground[x][y + 1] == 1) {
                     if(recursiveAuxiliary(playground, x, y+1, direction, blocks, findX, findY, instructions, filled+1)) return true;
+                    else {
+                        instructions[filled] = 'e';
+                    }
                 }
             }
         }
@@ -173,6 +182,9 @@ public class CarolPfadfinder {
             if (x - 1 >= 0) {
                 if (playground[x][y] - playground[x - 1][y] == -1 || playground[x][y] - playground[x - 1][y] == 0 || playground[x][y] - playground[x - 1][y] == 1) {
                     if(recursiveAuxiliary(playground, x-1, y, direction, blocks, findX, findY, instructions, filled+1)) return true;
+                    else {
+                        instructions[filled] = 'e';
+                    }
                 }
             }
         }
@@ -180,6 +192,9 @@ public class CarolPfadfinder {
             if (y - 1 >= 0) {
                 if (playground[x][y] - playground[x][y - 1] == -1 || playground[x][y] - playground[x][y - 1] == 0 || playground[x][y] - playground[x][y - 1] == 1) {
                     if(recursiveAuxiliary(playground, x, y-1, direction, blocks, findX, findY, instructions, filled+1)) return true;
+                    else {
+                        instructions[filled] = 'e';
+                    }
                 }
             }
         }
@@ -187,12 +202,22 @@ public class CarolPfadfinder {
         //turn right - 'r'
         instructions[filled] = 'r';
         if (direction - 1 == -1) direction = 3;
+        System.out.print(Arrays.toString(instructions) + "\n");
+        System.out.print(filled+"\n");
+        System.out.print(direction+"\n");
+        printPlayground(playground, x, y, direction-1, blocks);
         if(recursiveAuxiliary(playground, x, y, direction-1, blocks, findX, findY, instructions, filled+1)) return true;
+        else instructions[filled] = 'e';
 
         //turn left - 'l'
         instructions[filled] = 'l';
         if (direction+1 == 4 ) direction = 0;
+        System.out.println(Arrays.toString(instructions) + "\n");
+        System.out.print(filled+"\n");
+        System.out.print(direction+"\n");
+        printPlayground(playground, x, y, direction+1, blocks);
         if(recursiveAuxiliary(playground, x, y, direction+1, blocks, findX, findY, instructions, filled+1)) return true;
+        else instructions[filled] = 'e';
 
         //take block - 'n'
         instructions[filled] = 'n';
@@ -202,28 +227,45 @@ public class CarolPfadfinder {
                     if (x + 1 < playground.length && playground[x + 1][y] > 0) {
                         playground[x + 1][y]--;
                         if(recursiveAuxiliary(playground, x, y, direction, blocks + 1, findX, findY, instructions, filled+1)) return true;
+                        else{
+                            instructions[filled] = 'e';
+                            playground[x + 1][y]++;
+                        }
                     }
                 }
                 if (direction == 1) {
                     if (y + 1 < playground[0].length && playground[x][y + 1] > 0) {
                         playground[x][y + 1]--;
                         if(recursiveAuxiliary(playground, x, y, direction, blocks + 1, findX, findY, instructions, filled+1)) return true;
+                        else {
+                            instructions[filled] = 'e';
+                            playground[x][y + 1]++;
+                        }
                     }
                 }
                 if (direction == 2) {
                     if (x - 1 >= 0 && playground[x - 1][y] > 0) {
                         playground[x - 1][y]--;
                         if(recursiveAuxiliary(playground, x, y, direction, blocks + 1, findX, findY, instructions, filled+1)) return true;
+                        else {
+                            instructions[filled] = 'e';
+                            playground[x - 1][y]++;
+                        }
                     }
                 }
                 if (direction == 3) {
                     if (y - 1 >= 0 && playground[x][y - 1] > 0) {
                         playground[x][y - 1]--;
                         if(recursiveAuxiliary(playground, x, y, direction, blocks + 1, findX, findY, instructions, filled+1)) return true;
+                        else {
+                            instructions[filled] = 'e';
+                            playground[x][y - 1]++;
+                        }
                     }
                 }
             }
         }
+        else instructions[filled] = 'e';
 
         // put block - 'p'
         instructions[filled] = 'p';
@@ -233,28 +275,45 @@ public class CarolPfadfinder {
                     if (x + 1 < playground.length && playground[x + 1][y] < 9) {
                         playground[x + 1][y]++;
                         if(recursiveAuxiliary(playground, x, y, direction, blocks - 1, findX, findY, instructions, filled+1)) return true;
+                        else {
+                            instructions[filled] = 'e';
+                            playground[x + 1][y]--;
+                        }
                     }
                 }
                 if (direction == 1) {
                     if (y + 1 < playground[0].length && playground[x][y + 1] < 9) {
                         playground[x][y + 1]++;
                         if(recursiveAuxiliary(playground, x, y, direction, blocks - 1, findX, findY, instructions, filled+1)) return true;
+                        else {
+                            instructions[filled] = 'e';
+                            playground[x][y + 1]--;
+                        }
                     }
                 }
                 if (direction == 2) {
                     if (x - 1 >= 0 && playground[x - 1][y] < 9) {
                         playground[x - 1][y]++;
                         if(recursiveAuxiliary(playground, x, y, direction, blocks - 1, findX, findY, instructions, filled+1)) return true;
+                        else {
+                            instructions[filled] = 'e';
+                            playground[x - 1][y]--;
+                        }
                     }
                 }
                 if (direction == 3) {
                     if (y - 1 >= 0 && playground[x][y - 1] < 9) {
                         playground[x][y - 1]++;
                         if(recursiveAuxiliary(playground, x, y, direction, blocks - 1, findX, findY, instructions, filled+1)) return true;
+                        else {
+                            instructions[filled] = 'e';
+                            playground[x][y - 1]--;
+                        }
                     }
                 }
             }
         }
+        instructions[filled] = 'p';
         return false;
     }
 
@@ -273,16 +332,15 @@ public class CarolPfadfinder {
         // Note that in this array initialization the rows are in reverse order and both
         // x- and y-axis are swapped.
         int[][] playground = { //
-                  {0}
-//                {0, 0, 0, 0, 0, 9,}, //
-//                {0, 0, 0, 0, 0, 9,}, //
-//                {9, 9, 9, 7, 9, 9,}, //
-//                {9, 0, 0, 0, 0, 0,}, //
-////				{ -1, -1, -1,  2, -1, -1, }, //
-////				{ -1,  2,  2, -1, -1,  2, }, //
-////				{ -1,  2, -1, -1,  2, -1, }, //
-////				{ -1, -1, -1, -1, -1,  2, }, //
-////				{  2, -1, -1,  2, -1, -1, }, //
+                {0, 0, 0, 0, 0, 9,}, //
+                {0, 0, 0, 0, 0, 9,}, //
+                {9, 9, 9, 7, 9, 9,}, //
+                {9, 0, 0, 0, 0, 0,}, //
+//				{ -1, -1, -1,  2, -1, -1, }, //
+//				{ -1,  2,  2, -1, -1,  2, }, //
+//				{ -1,  2, -1, -1,  2, -1, }, //
+//				{ -1, -1, -1, -1, -1,  2, }, //
+//				{  2, -1, -1,  2, -1, -1, }, //
         };
         //     int startX = 0;
         //      int startY = 0;
@@ -306,10 +364,10 @@ public class CarolPfadfinder {
         int y = 0;
         int direction = 3;
         int blocks = 0;
-        int findX = 0;
-        int findY = 0;
-        char[] instructions = new char[10];
-        for (int i = 0; i < 10; i++) {
+        int findX = 3;
+        int findY = 5;
+        char[] instructions = new char[30];
+        for (int i = 0; i < 30; i++) {
             instructions[i] = 'e';
         }
         boolean a = findInstructions(playground, x, y, direction, blocks, findX, findY, instructions);
