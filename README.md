@@ -7,3 +7,5 @@
 ##### 'n' Carol takes a block of ice from the field in the direction of view. To do this, she must be able to pick up at least one block of ice and the space in front of her must not be water (-1). If Carol is in the water, she cannot take any blocks of ice either.
 
 The height of each field is a value from -1 to 9. -1 is water that is a block of ice deep. The height is the number of ice blocks above the water, and the number of ice blocks on a field is equal to the height plus one. Carol can move within this playing field and carry around 0 to 10 blocks of ice.
+
+this code finds the optimal instruction sequence (the sortest way) for Carol to reach her goal.
